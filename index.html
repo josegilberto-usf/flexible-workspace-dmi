@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A Digital Maturity Index assessment for the flexible workspace industry."
+    />
+    <title>Digital Maturity Index | Flexible Workspace Industry</title>
+    <style>
+      :root {
+        --navy: #0c2738;
+        --ink: #101d39;
+        --muted: #49617b;
+        --teal: #007d80;
+        --yellow: #ffc600;
+        --line: #dbe5ec;
+        --soft: #f2f7f9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #fbfcfd;
+        color: var(--ink);
+        font:
+          15px/1.5 Arial,
+          Helvetica,
+          sans-serif;
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button,
+      summary,
+      label {
+        touch-action: manipulation;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      :focus-visible {
+        outline: 3px solid #159da6;
+        outline-offset: 4px;
+      }
+      header {
+        background: var(--navy);
+        border-left: 12px solid var(--yellow);
+        color: white;
+      }
+      .header-inner {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        min-height: 102px;
+        padding: 18px 28px;
+      }
+      .brand {
+        font-size: 28px;
+        letter-spacing: -1px;
+        font-weight: 800;
+      }
+      .title-block {
+        border-left: 1px solid #446071;
+        padding-left: 26px;
+      }
+      .app-title {
+        font-size: 23px;
+        font-weight: 700;
+      }
+      .subtitle {
+        color: #c1d9e7;
+        font-size: 15px;
+      }
+      .state-nav {
+        display: flex;
+        gap: 26px;
+        margin-left: auto;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+      .state-nav span {
+        padding: 9px 0;
+        border-bottom: 3px solid transparent;
+        color: #bcd0df;
+      }
+      .state-nav .active {
+        color: white;
+        border-color: var(--yellow);
+      }
+      .mark {
+        display: grid;
+        grid-template-columns: repeat(3, 12px);
+        gap: 4px;
+        margin-left: 14px;
+      }
+      .mark i {
+        height: 12px;
+        border-radius: 3px;
+        background: #365c72;
+      }
+      .mark i:nth-child(3n) {
+        background: #658599;
+      }
+      .mark i:nth-child(6) {
+        background: var(--yellow);
+      }
+      main {
+        max-width: 1200px;
+        margin: auto;
+        padding: 34px 28px 0;
+      }
+      h1 {
+        font-size: 32px;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+        margin: 4px 0 8px;
+      }
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+      .lead {
+        color: var(--muted);
+        font-size: 16px;
+        margin-bottom: 22px;
+      }
+      .eyebrow {
+        color: var(--teal);
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .progress-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        font-size: 13px;
+        margin-bottom: 8px;
+        color: var(--muted);
+      }
+      progress {
+        display: block;
+        width: 100%;
+        height: 7px;
+        border: 0;
+        border-radius: 10px;
+        background: #e7eef2;
+        accent-color: var(--teal);
+      }
+      progress::-webkit-progress-bar {
+        background: #e7eef2;
+        border-radius: 10px;
+      }
+      progress::-webkit-progress-value {
+        background: var(--teal);
+        border-radius: 10px;
+      }
+      progress::-moz-progress-bar {
+        background: var(--teal);
+        border-radius: 10px;
+      }
+      .steps {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 25px 0 28px;
+        gap: 16px;
+      }
+      .steps li {
+        flex: 1;
+        position: relative;
+      }
+      .steps li:not(:last-child):after {
+        content: "";
+        position: absolute;
+        top: 19px;
+        left: 52px;
+        right: 0;
+        height: 1px;
+        background: #c4d5e1;
+      }
+      .step-button {
+        border: 0;
+        background: none;
+        text-align: left;
+        padding: 0;
+        color: var(--muted);
+        width: 100%;
+        font-size: 12px;
+      }
+      .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #e4ebf0;
+        color: var(--ink);
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+      .step-button[aria-current="step"] {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .step-button[aria-current="step"] .step-number,
+      .step-button.complete .step-number {
+        background: var(--teal);
+        color: white;
+      }
+      .step-name {
+        display: block;
+        max-width: 160px;
+      }
+      .dimension {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background: white;
+        overflow: hidden;
+      }
+      .dimension > summary {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+      .dimension > summary::-webkit-details-marker {
+        display: none;
+      }
+      .dimension > summary:after {
+        content: "⌄";
+        font-size: 20px;
+        font-weight: 400;
+      }
+      .dimension[open] > summary:after {
+        transform: rotate(180deg);
+      }
+      .dimension[open] {
+        background: linear-gradient(120deg, #f6f9fb, #fff);
+      }
+      .dimension[open] > summary {
+        border-bottom: 1px solid var(--line);
+      }
+      .dimension-index {
+        border-right: 1px solid var(--line);
+        padding-right: 14px;
+      }
+      .dimension-count {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 400;
+        margin-left: auto;
+        white-space: nowrap;
+      }
+      .dimension-body {
+        padding: 6px 20px 20px;
+      }
+      fieldset {
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        margin: 0;
+        padding: 20px 0;
+      }
+      fieldset:last-of-type {
+        border-bottom: 0;
+      }
+      legend {
+        float: left;
+        width: 100%;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 0;
+        margin-bottom: 12px;
+      }
+      legend + div {
+        clear: both;
+      }
+      .q-number {
+        color: var(--teal);
+        font-size: 12px;
+        display: inline-block;
+        width: 30px;
+      }
+      .answers {
+        display: grid;
+        gap: 5px;
+      }
+      .answer {
+        display: flex;
+        align-items: flex-start;
+        gap: 11px;
+        padding: 9px 12px;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        color: #354e6b;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .answer:hover {
+        background: #edf5f6;
+      }
+      .answer:has(input:checked) {
+        background: #e5f3f2;
+        border-color: #a0d3d1;
+        color: #075f62;
+      }
+      .answer input {
+        accent-color: var(--teal);
+        width: 18px;
+        height: 18px;
+        margin: 1px 0 0;
+        flex-shrink: 0;
+      }
+      .answer-value {
+        font-weight: 700;
+      }
+      .dimension-controls {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      button.primary,
+      button.secondary {
+        border-radius: 6px;
+        padding: 12px 19px;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .primary {
+        background: var(--teal);
+        border: 1px solid var(--teal);
+        color: white;
+      }
+      .primary:hover:not(:disabled) {
+        background: #006b6e;
+      }
+      .secondary {
+        background: #edf2f5;
+        border: 1px solid var(--line);
+        color: #38516b;
+      }
+      .submit-panel {
+        margin-top: 24px;
+        padding: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+      }
+      .submit-panel p {
+        margin: 3px 0 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .placeholder-note {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 20px 0;
+      }
+      .results-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .results-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 18px;
+        margin-top: 24px;
+      }
+      .results-column {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .panel {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 22px;
+        box-shadow: 0 2px 5px #15344e03;
+      }
+      .chart-panel h2 {
+        font-size: 21px;
+        margin-bottom: 0;
+      }
+      .chart-panel p {
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+      .chart-container {
+        height: 370px;
+        position: relative;
+      }
+      .chart-key {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+      .chart-key:before {
+        content: "";
+        height: 8px;
+        width: 20px;
+        border-radius: 3px;
+        background: var(--teal);
+      }
+      .score-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .score-card {
+        padding: 20px 18px;
+      }
+      .score-card:last-child {
+        grid-column: 1/-1;
+      }
+      .score {
+        font-size: 34px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: var(--teal);
+        letter-spacing: -1px;
+      }
+      .score small {
+        font-size: 20px;
+        color: var(--ink);
+        letter-spacing: 0;
+      }
+      .score-bar {
+        height: 8px;
+        background: #edf2f5;
+        border-radius: 5px;
+        margin: 12px 0;
+      }
+      .score-bar span {
+        display: block;
+        height: 100%;
+        border-radius: 5px;
+        background: var(--teal);
+      }
+      .score-card.low .score {
+        color: #c12930;
+      }
+      .score-card.low .score-bar span {
+        background: #c12930;
+      }
+      .score-card.mid .score-bar span {
+        background: #f5bc00;
+      }
+      .score-card h3 {
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0 0 10px;
+      }
+      .stage {
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      .stage-description {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.55;
+        margin-bottom: 0;
+      }
+      .profile-panel {
+        background: var(--soft);
+        border-left: 6px solid var(--yellow);
+        padding: 25px;
+        flex: 1;
+      }
+      .profile-label {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .profile-panel h2 {
+        font-size: 27px;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+      .profile-panel p {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .next-action {
+        border-top: 1px solid #ccdde6;
+        padding-top: 18px;
+        margin-top: 20px;
+      }
+      .next-action h3 {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+      .lowest-panel {
+        background: var(--soft);
+        border: 0;
+      }
+      .lowest-panel h2 {
+        font-size: 15px;
+        margin-bottom: 16px;
+      }
+      .lowest-panel ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        counter-reset: priority;
+      }
+      .lowest-panel li {
+        counter-increment: priority;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 12px;
+        font-size: 14px;
+      }
+      .lowest-panel li:before {
+        content: counter(priority);
+        background: #c12930;
+        color: white;
+        width: 27px;
+        height: 27px;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+      }
+      .tie-note {
+        font-size: 11px;
+        color: var(--muted);
+        margin: 14px 0 0;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        max-width: 1144px;
+        margin: 30px auto 0;
+        padding: 22px 0 28px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      footer strong {
+        font-size: 15px;
+        color: var(--ink);
+        letter-spacing: -0.7px;
+      }
+      footer span:last-child {
+        margin-left: auto;
+      }
+      @media (min-width: 1000px) {
+        .dimension-body {
+          padding-left: 25px;
+          padding-right: 25px;
+        }
+        .answers {
+          grid-template-columns: 1fr;
+        }
+        .answer {
+          max-width: 100%;
+        }
+      }
+      @media (max-width: 760px) {
+        .header-inner {
+          padding: 18px;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .brand {
+          font-size: 23px;
+        }
+        .title-block {
+          padding-left: 16px;
+        }
+        .app-title {
+          font-size: 19px;
+        }
+        .subtitle {
+          font-size: 12px;
+        }
+        .state-nav {
+          margin-left: 0;
+          width: 100%;
+          padding-left: 0;
+          gap: 24px;
+        }
+        .mark {
+          display: none;
+        }
+        main {
+          padding: 25px 18px 0;
+        }
+        h1 {
+          font-size: 27px;
+        }
+        .results-layout {
+          grid-template-columns: 1fr;
+        }
+        .results-heading {
+          flex-direction: column;
+        }
+        .chart-container {
+          height: 350px;
+        }
+        .steps {
+          gap: 8px;
+        }
+        .step-name {
+          font-size: 10px;
+        }
+        .steps li:not(:last-child):after {
+          left: 43px;
+        }
+        .dimension > summary {
+          padding: 14px 12px;
+          gap: 9px;
+          font-size: 13px;
+        }
+        .dimension-index {
+          padding-right: 9px;
+        }
+        .dimension-count {
+          font-size: 10px;
+        }
+        .dimension-body {
+          padding: 4px 12px 16px;
+        }
+        .submit-panel {
+          align-items: stretch;
+          flex-direction: column;
+        }
+        .dimension-controls button {
+          font-size: 12px;
+          padding: 11px;
+        }
+        .score-card {
+          padding: 16px;
+        }
+        .score-grid {
+          gap: 10px;
+        }
+        footer {
+          margin: 28px 18px 0;
+          flex-wrap: wrap;
+          gap: 8px 15px;
+        }
+        footer span:last-child {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        button,
+        .answer {
+          transition: background 0.15s ease;
+        }
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="brand">DMI APP</div>
+        <div class="title-block">
+          <div class="app-title">Digital Maturity Index</div>
+          <div class="subtitle">Flexible Workspace Industry</div>
+        </div>
+        <div class="state-nav" aria-label="Assessment status">
+          <span id="assessment-tab" class="active">Assessment</span
+          ><span id="results-tab">Results</span>
+        </div>
+        <div class="mark" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section id="assessment-view" aria-labelledby="assessment-heading">
+        <div class="eyebrow" id="step-label">Step 1 of 5</div>
+        <h1 id="assessment-heading" tabindex="-1">
+          Workspace &amp; Portfolio Data
+        </h1>
+        <p class="lead">
+          Answer the following questions based on your organization’s current
+          state.
+        </p>
+        <div class="progress-row">
+          <span>Assessment progress</span
+          ><span id="progress-text" role="status" aria-live="polite"
+            >0 of 15 answered</span
+          >
+        </div>
+        <progress
+          id="overall-progress"
+          max="15"
+          value="0"
+          aria-label="Questions answered"
+        ></progress>
+        <ol class="steps" id="steps"></ol>
+        <form id="assessment-form">
+          <div id="dimensions"></div>
+          <div class="submit-panel">
+            <div>
+              <strong>Ready to see your digital maturity?</strong>
+              <p id="submit-help">
+                Answer all 15 questions to unlock your results.
+              </p>
+            </div>
+            <button
+              type="submit"
+              class="primary"
+              id="submit-button"
+              disabled
+              aria-describedby="submit-help"
+            >
+              View My Results →
+            </button>
+          </div>
+        </form>
+        <p class="placeholder-note">
+          Working framework · Placeholder diagnostic questions and maturity
+          definitions. Choose the highest level your organization consistently
+          meets. Responses stay in memory for this session only.
+        </p>
+      </section>
+      <section id="results-view" hidden aria-labelledby="results-heading">
+        <div class="results-heading">
+          <div>
+            <h1 id="results-heading" tabindex="-1">
+              Your Digital Maturity Results
+            </h1>
+            <p class="lead">
+              Your organization’s maturity across the five capability
+              dimensions.
+            </p>
+          </div>
+          <button type="button" id="retake-button" class="secondary">
+            ↻ Retake Assessment
+          </button>
+        </div>
+        <div class="results-layout">
+          <div class="results-column">
+            <div class="panel chart-panel">
+              <h2>Digital Maturity Index</h2>
+              <p>Flexible Workspace Industry</p>
+              <div class="chart-container">
+                <canvas
+                  id="radar-chart"
+                  role="img"
+                  aria-label="Radar chart of your five dimension scores; equivalent scores appear in the score cards."
+                ></canvas>
+                <p id="chart-unavailable" hidden>
+                  Connect to the internet and reopen this file to load the radar
+                  chart. Your calculated scores are shown in the cards.
+                </p>
+              </div>
+              <div class="chart-key">Your dimension scores · 1–5</div>
+            </div>
+            <div class="panel profile-panel" id="profile"></div>
+          </div>
+          <div class="results-column">
+            <div id="score-cards" class="score-grid"></div>
+            <div id="lowest" class="panel lowest-panel"></div>
+          </div>
+        </div>
+        <p class="placeholder-note">
+          Working framework · Scores reflect your self-assessment. Stage
+          definitions and profile rules are placeholders, not industry
+          benchmarks.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <strong>DMI APP</strong
+      ><span
+        >Digital Transformation&nbsp; | &nbsp;AI Strategy &amp; Competitive
+        Advantage</span
+      ><span>Flexible Spaces. Smarter Decisions.</span>
+    </footer>
+    <script>
+      "use strict";
+      // CONTENT: Questions and answer labels from the Flexible Workspace Digital Maturity Assessment.
+      // Each question retains a stable ID; values are explicit integers from 1 through 5.
+      const question = (id, text, labels) => ({
+        id,
+        text,
+        answers: labels.map((label, index) => ({ value: index + 1, label })),
+      });
+      const dimensions = [
+        {
+          id: "data",
+          name: "Workspace & Portfolio Data",
+          questions: [
+            question(
+              "data1",
+              "How is physical space utilization captured across your portfolio?",
+              [
+                "Utilization data is not systematically tracked or relies on occasional physical headcounts.",
+                "Space utilization is tracked via periodic badge swipes or front-desk check-in logs aggregated manually in spreadsheets.",
+                "Dedicated IoT presence sensors or Wi-Fi triangulation capture hourly zone occupancy across core enterprise locations.",
+                "Desk- and room-level sensor telemetry is continuously aggregated into a centralized data warehouse across all operational sites.",
+                "Real-time streaming sensor feeds dynamically trigger automated HVAC adjustments, live floor-plan heatmaps, and continuous capacity alerts.",
+              ],
+            ),
+            question(
+              "data2",
+              "How are location-level lease commitments connected to daily operating and revenue metrics?",
+              [
+                "Master lease agreements, utility bills, and member revenues are maintained in disconnected legacy accounting ledgers.",
+                "Lease terms and square footage figures are manually reconciled against monthly billing statements for executive reviews.",
+                "A shared database matches building lease expiration dates and rent schedules against high-level property revenues.",
+                "Enterprise data models dynamically link granular seat license billings directly to location-specific lease liabilities and variable operational overhead.",
+                "Portfolio data pipelines unify real-time net effective rent, lease termination exposure, and margin-per-desk into automated margin-at-risk monitoring dashboards.",
+              ],
+            ),
+            question(
+              "data3",
+              "How is historical desk occupancy integrated into future capacity planning?",
+              [
+                "Desk planning relies entirely on location manager intuition and annual lease targets without historical modeling.",
+                "Past occupancy percentages are reviewed quarterly in static PDF reports to adjust basic staffing expectations.",
+                "Multi-year occupancy trends are mapped against local contract renewal calendars to set market pricing minimums.",
+                "Historical seat demand variance is programmatically combined with pipeline CRM stages to dictate floor reconfigurations.",
+                "Continuous pipeline velocity and historical multi-location drop-off patterns feed programmatic scenario models that dictate expansion and down-sizing timelines.",
+              ],
+            ),
+          ],
+        },
+        {
+          id: "member",
+          name: "Member Digital Experience",
+          questions: [
+            question(
+              "member1",
+              "What primary channel do enterprise and hot-desk members use to manage bookings and workplace access?",
+              [
+                "Bookings and room reservations are handled verbally with community managers or recorded on paper logbooks.",
+                "Members reserve conference rooms via email requests, dedicated web forms, or localized desktop portals.",
+                "A proprietary mobile application enables self-service room bookings and digital keycard door access across standard facilities.",
+                "The mobile application unifies room access, guest registration, digital billing, support ticketing, and tiered desk reservations across global locations.",
+                "An integrated member portal automates cross-city room allocations, enterprise identity management (SSO), and usage-tailored workplace amenities.",
+              ],
+            ),
+            question(
+              "member2",
+              "How are member support issues, facilities requests, and IT tickets resolved?",
+              [
+                "Member issues are reported in person at the front desk or via unstructured email chains to on-site building managers.",
+                "Requests are manually cataloged into a single digital inbox and triaged without formalized SLAs.",
+                "A ticketing platform routes maintenance and network tickets to local site teams based on category selection.",
+                "An omnichannel support system routes member tickets automatically, tracking first-response times and escalations against SLA benchmarks.",
+                "Context-aware digital systems resolve standard requests via automated self-service workflows while routing urgent facility anomalies based on historical resolution velocity.",
+              ],
+            ),
+            question(
+              "member3",
+              "How are community events, enterprise networking, and localized offerings delivered to occupants?",
+              [
+                "Announcements are posted on physical bulletin boards or distributed via printed elevator notices.",
+                "Site-wide broadcast emails notify all building occupants of monthly mixers or building updates.",
+                "An in-app events calendar lists scheduled programming, requiring manual RSVP submissions.",
+                "In-app community feeds personalize event visibility and professional networking prompts based on member industry and declared company size.",
+                "Algorithmic member matching delivers targeted business development introductions and dynamically curated local workspace perks based on observed foot traffic.",
+              ],
+            ),
+          ],
+        },
+        {
+          id: "operations",
+          name: "Workspace Operations Automation",
+          questions: [
+            question(
+              "operations1",
+              "How are facility maintenance requests and cleaning schedules triggered?",
+              [
+                "Cleaning routines and preventive maintenance follow fixed, unadjusted calendar rotations regardless of building traffic.",
+                "Maintenance work orders are manually initiated only after physical occupant complaints reach the community desk.",
+                "Cleaning crews follow static daily checklists that are marked complete via localized mobile forms.",
+                "Sensor-based desk and restroom foot-traffic thresholds dynamically trigger custodial task queues in property operations software.",
+                "Predictive facilities software auto-dispatches maintenance vendors and optimizes custodial routing using live usage telemetry and component runtime metrics.",
+              ],
+            ),
+            question(
+              "operations2",
+              "What workflow governs new member onboarding, desk provisioning, and access badging?",
+              [
+                "Community teams manually configure keycards, issue Wi-Fi passwords, and generate contract agreements on paper.",
+                "Welcome emails with static network credentials are manually sent after signed PDFs are uploaded to storage.",
+                "Web checkout triggers automated welcome emails and populates a localized door-access entry for manual site approval.",
+                "CRM deal closure automatically provisions digital badges, member profiles, and enterprise network profiles without human touch.",
+                "Zero-touch provisioning synchronizes enterprise client HR directories (SCIM) directly with physical turnstiles, private Wi-Fi subnets, and meeting allotments.",
+              ],
+            ),
+            question(
+              "operations3",
+              "How are utility systems (HVAC, lighting, acoustic masking) managed across business hours?",
+              [
+                "Thermostats and lighting banks are adjusted manually via physical wall switches by opening and closing staff.",
+                "Utility schedules operate on rigid weekly timers irrespective of true occupant counts or holidays.",
+                "Centralized building management systems (BMS) allow site managers to remotely modify environmental schedules via web dashboards.",
+                "Environmental zones modulate automatically according to aggregate badge swipe volume and scheduled calendar meetings.",
+                "IoT edge controllers continuously balance multi-zone HVAC and ambient lighting against minute-by-minute occupancy, dynamic utility spot prices, and thermal load sensors.",
+              ],
+            ),
+          ],
+        },
+        {
+          id: "ai",
+          name: "AI-Enabled Portfolio Intelligence",
+          questions: [
+            question(
+              "ai1",
+              "How is flexible workspace desk pricing and contract discount authorization determined?",
+              [
+                "Desk rates are fixed by static rate cards, with ad-hoc discounting left to individual sales rep discretion.",
+                "Sales leadership reviews localized spreadsheets monthly to manually revise promotional discounts by city.",
+                "Rate cards adjust quarterly based on historical submarket averages and competitors' advertised rates.",
+                "Dynamic pricing models recommend desk and office rates based on real-time pipeline volume, seasonal move-ins, and local vacancy.",
+                "Machine learning models continuously compute real-time dynamic rates across enterprise tiers, executing programmatic discounting within optimized risk-adjusted margin guardrails.",
+              ],
+            ),
+            question(
+              "ai2",
+              "How are churn risks and contract non-renewals identified?",
+              [
+                "Member departures are recognized only upon receipt of formal written lease cancellation notices.",
+                "Community staff informally flag disengaged enterprise accounts based on casual observation.",
+                "Rule-based reports highlight accounts whose recorded badge entries decline by more than 30% month-over-month.",
+                "Multi-factor churn models analyze physical occupancy decline, ticket sentiment, and invoice payment delays to surface accounts at risk.",
+                "Predictive retention algorithms identify micro-signals of churn months in advance, triggering automated targeted incentives and executive retention alerts.",
+              ],
+            ),
+            question(
+              "ai3",
+              "How does the organization identify and evaluate new property expansion or down-sizing opportunities?",
+              [
+                "Expansion decisions rely on broker pitch decks and senior executive relationships without standardized evaluation.",
+                "Real estate teams review regional commercial demographic reports and spreadsheet-based pro formas.",
+                "Site selection tools score potential geographic submarkets using aggregate municipal census and transportation data.",
+                "Machine learning models screen target locations by ingesting local corporate relocation flows, foot-traffic data, and competitive density.",
+                "Predictive portfolio engines simulate multi-year net absorption, cannibalization of existing locations, and lease downside risks under macro stress scenarios.",
+              ],
+            ),
+          ],
+        },
+        {
+          id: "operating",
+          name: "Digital Operating Model",
+          questions: [
+            question(
+              "operating1",
+              "How are software development and digital product enhancements structured within the business?",
+              [
+                "IT is treated as a decentralized support cost center focused solely on fixing broken office hardware.",
+                "Technology needs are outsourced to third-party vendors with minimal internal oversight or strategic roadmap integration.",
+                "Dedicated internal IT teams manage enterprise applications and mobile tools in functional departmental silos.",
+                "Cross-functional product squads (combining software engineering, operations, and commercial leaders) iterate on workspace platforms.",
+                "Product management functions operate alongside core real estate teams, prioritizing enterprise digital solutions based on measurable lifetime value and operating margin gains.",
+              ],
+            ),
+            question(
+              "operating2",
+              "How are on-site community and operations teams trained on emerging digital platforms?",
+              [
+                "Operational tooling training is ad-hoc, verbal, and relies on peer shadowing without formal documentation.",
+                "Central operations distributes static PDF training decks and manuals whenever new software is deployed.",
+                "Staff complete digital training modules and standardized testing prior to managing desk locations independently.",
+                "Role-based learning platforms track operational competency and deliver continuous education based on feature rollouts.",
+                "Continuous enablement ecosystems deliver interactive workflow simulations, track tool adoption analytics, and tie field proficiency directly to operational performance incentives.",
+              ],
+            ),
+            question(
+              "operating3",
+              "How are software capital expenditures and digital platform investments governed and measured?",
+              [
+                "Software purchases occur haphazardly on individual corporate credit cards without central oversight.",
+                "Technology requests are evaluated annually during general budgetary approvals with generic cost justification.",
+                "Enterprise IT budgets are centralized, evaluating software spend against baseline operational overhead caps.",
+                "Technology investments require formal business cases measuring anticipated labor hour reductions or incremental member yield.",
+                "Digital capital allocation operates via venture-style governance, linking ongoing funding tranches directly to audited ROI, operational efficiency metrics, and verified ARR expansion.",
+              ],
+            ),
+          ],
+        },
+      ];
+      // Replace with the Framework Designer’s final Stage 1–5 names and descriptions.
+      // Apply thresholds to full-precision averages, not the rounded display value.
+      const stageDefinitions = [
+        {
+          min: 1,
+          number: 1,
+          name: "Foundational",
+          description:
+            "Work relies on manual tasks and isolated practices; shared digital foundations are limited.",
+        },
+        {
+          min: 2,
+          number: 2,
+          name: "Emerging",
+          description:
+            "Digital tools and local pilots are in place, but practices are not yet consistent across locations.",
+        },
+        {
+          min: 3,
+          number: 3,
+          name: "Developing",
+          description:
+            "Common digital practices are established, with opportunities to connect and scale them.",
+        },
+        {
+          min: 4,
+          number: 4,
+          name: "Integrated",
+          description:
+            "Connected systems and shared practices inform decisions across the portfolio.",
+        },
+        {
+          min: 4.5,
+          number: 5,
+          name: "Adaptive",
+          description:
+            "Measured outcomes and continuous improvement guide digital practices across the portfolio.",
+        },
+      ];
+      // Replace these five placeholder profiles, interpretations, and recommended actions.
+      const maturityProfiles = {
+        foundations: {
+          name: "Building the Foundations",
+          interpretation:
+            "Digital practices are at an early stage across all five dimensions. Establishing consistent records, ownership, and repeatable workflows can create a base for future investment.",
+          action:
+            "Assign an owner to standardize one core data and operating workflow across a small group of locations.",
+        },
+        connected: {
+          name: "Connected & Adaptive",
+          interpretation:
+            "Digital capabilities are integrated across all five dimensions. Shared data, member services, automation, intelligence, and governance provide a strong base for continuous improvement.",
+          action:
+            "Select one portfolio outcome and run a measured improvement cycle across the connected operating model.",
+        },
+        dataGap: {
+          name: "Data Foundation Gap",
+          interpretation:
+            "Workspace and portfolio data trails the other capabilities. Inconsistent or disconnected records can constrain otherwise established digital services and decision processes.",
+          action:
+            "Define shared portfolio metrics, assign data owners, and reconcile one priority dataset across locations.",
+        },
+        experienceGap: {
+          name: "Digital Experience, Untapped Intelligence",
+          interpretation:
+            "Member-facing digital capabilities are established while AI-enabled portfolio intelligence remains early. Existing member and operating signals offer a starting point for a governed analytics pilot.",
+          action:
+            "Pilot one occupancy forecast with a named owner, validated data, human review, and a measured accuracy target.",
+        },
+        execution: {
+          name: "Execution Gap",
+          interpretation:
+            "Digital capabilities are ahead of the operating model that supports them. Gaps in ownership, skills, and change practices can limit consistent adoption across locations.",
+          action:
+            "Establish cross-functional governance with clear decision rights, accountable owners, and a shared change management plan.",
+        },
+      };
+      const mean = (values) =>
+        values.reduce((sum, value) => sum + value, 0) / values.length;
+      // First matching rule wins. Uniform = every score in the band; significant gap = 1 point.
+      // Keep precedence and thresholds here for replacement by the final Interpretation Guide.
+      const profileMatchingRules = [
+        { profile: "foundations", matches: (s) => s.every((v) => v < 3) },
+        { profile: "connected", matches: (s) => s.every((v) => v >= 4) },
+        { profile: "dataGap", matches: (s) => mean(s.slice(1)) - s[0] >= 1 },
+        { profile: "experienceGap", matches: (s) => s[1] >= 4 && s[3] < 3 },
+        {
+          profile: "execution",
+          matches: (s) => mean(s.slice(0, 4)) - s[4] >= 1,
+        },
+      ];
+      function scoreAssessment(responses) {
+        if (
+          !dimensions.every((d) =>
+            d.questions.every(
+              (q) =>
+                Number.isInteger(responses[q.id]) &&
+                q.answers.some((a) => a.value === responses[q.id]),
+            ),
+          )
+        )
+          throw new Error("All 15 questions must have one valid response.");
+        return dimensions.map((d) =>
+          mean(d.questions.map((q) => responses[q.id])),
+        );
+      }
+      function stageFor(score) {
+        return [...stageDefinitions]
+          .reverse()
+          .find((stage) => score >= stage.min);
+      }
+      // Stable tie break: original dimension order, so exactly two are always selected.
+      function lowestDimensions(scores) {
+        return scores
+          .map((score, index) => ({
+            score,
+            index,
+            name: dimensions[index].name,
+          }))
+          .sort((a, b) => a.score - b.score || a.index - b.index)
+          .slice(0, 2);
+      }
+      function selectProfile(scores) {
+        const rule = profileMatchingRules.find((rule) => rule.matches(scores));
+        if (rule) return maturityProfiles[rule.profile];
+        const lowest = lowestDimensions(scores);
+        return {
+          name: "Building a Balanced Portfolio",
+          interpretation: `Your capability mix does not match a specialized profile. ${lowest[0].name} and ${lowest[1].name} are the two lowest-scoring dimensions and provide a consistent starting point for prioritization.`,
+          action: `Set one measurable improvement target for ${lowest[0].name}, with a named owner and a review date, then review dependencies with ${lowest[1].name}.`,
+        };
+      }
+      const totalQuestions = dimensions.reduce(
+        (sum, d) => sum + d.questions.length,
+        0,
+      );
+      let responses = {},
+        activeDimension = 0,
+        radarChart = null;
+      const $ = (id) => document.getElementById(id);
+      const escapeHTML = (value) =>
+        String(value).replace(
+          /[&<>"']/g,
+          (char) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[char],
+        );
+      function renderAssessment() {
+        $("steps").innerHTML = dimensions
+          .map(
+            (d, i) =>
+              `<li><button type="button" class="step-button" data-step="${i}" aria-controls="dimension-${i}" ${i === 0 ? 'aria-current="step"' : ""}><span class="step-number">${i + 1}</span><span class="step-name">${escapeHTML(d.name)}</span></button></li>`,
+          )
+          .join("");
+        $("dimensions").innerHTML = dimensions
+          .map(
+            (d, i) =>
+              `<details class="dimension" id="dimension-${i}" ${i === 0 ? "open" : ""}><summary><span class="dimension-index">${i + 1}</span><span>${escapeHTML(d.name)}</span><span class="dimension-count" id="count-${i}">0 of ${d.questions.length} answered</span></summary><div class="dimension-body">${d.questions.map((q, qi) => `<fieldset><legend><span class="q-number">Q${qi + 1}</span>${escapeHTML(q.text)}</legend><div class="answers">${q.answers.map((a) => `<label class="answer"><input type="radio" required name="${q.id}" value="${a.value}"><span><span class="answer-value">${a.value}</span> — ${escapeHTML(a.label)}</span></label>`).join("")}</div></fieldset>`).join("")}<div class="dimension-controls"><button type="button" class="secondary" data-step="${i - 1}" ${i === 0 ? "disabled" : ""}>← Previous</button>${i < dimensions.length - 1 ? `<button type="button" class="primary" data-step="${i + 1}">Next: ${escapeHTML(dimensions[i + 1].name)} →</button>` : '<button type="button" class="secondary" id="review-progress">Review completion ↓</button>'}</div></div></details>`,
+          )
+          .join("");
+        document.querySelectorAll(".dimension").forEach((detail, i) =>
+          detail.addEventListener("toggle", () => {
+            if (detail.open) {
+              activeDimension = i;
+              document.querySelectorAll(".dimension").forEach((other) => {
+                if (other !== detail) other.open = false;
+              });
+              updateActiveDimension();
+            }
+          }),
+        );
+        updateProgress();
+        updateActiveDimension();
+      }
+      function updateActiveDimension() {
+        $("assessment-heading").textContent = dimensions[activeDimension].name;
+        $("step-label").textContent =
+          `Step ${activeDimension + 1} of ${dimensions.length}`;
+        document.querySelectorAll(".step-button").forEach((button, i) => {
+          if (i === activeDimension)
+            button.setAttribute("aria-current", "step");
+          else button.removeAttribute("aria-current");
+        });
+      }
+      function openDimension(index) {
+        if (index < 0 || index >= dimensions.length) return;
+        activeDimension = index;
+        document.querySelectorAll(".dimension").forEach((detail, i) => {
+          detail.open = i === index;
+        });
+        updateActiveDimension();
+        $("assessment-heading").focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+      function updateProgress() {
+        const count = Object.keys(responses).length;
+        $("overall-progress").value = count;
+        $("progress-text").textContent =
+          `${count} of ${totalQuestions} answered`;
+        $("submit-button").disabled = count !== totalQuestions;
+        $("submit-help").textContent =
+          count === totalQuestions
+            ? "All questions answered. Your results are ready to calculate."
+            : `Answer all ${totalQuestions} questions to unlock your results. ${totalQuestions - count} remaining.`;
+        dimensions.forEach((d, i) => {
+          const answered = d.questions.filter(
+            (q) => responses[q.id] !== undefined,
+          ).length;
+          $("count-" + i).textContent =
+            `${answered} of ${d.questions.length} answered`;
+          document
+            .querySelectorAll(".step-button")
+            [i].classList.toggle("complete", answered === d.questions.length);
+        });
+      }
+      function renderResults(scores) {
+        const profile = selectProfile(scores),
+          lowest = lowestDimensions(scores);
+        $("score-cards").innerHTML = dimensions
+          .map((d, i) => {
+            const stage = stageFor(scores[i]);
+            return `<article class="panel score-card ${scores[i] < 2.5 ? "low" : scores[i] < 4 ? "mid" : ""}"><div class="score">${scores[i].toFixed(1)} <small>/ 5</small></div><div class="score-bar" aria-hidden="true"><span style="width:${(scores[i] / 5) * 100}%"></span></div><h3>${escapeHTML(d.name)}</h3><p class="stage">Stage ${stage.number} — ${escapeHTML(stage.name)}</p><p class="stage-description">${escapeHTML(stage.description)}</p></article>`;
+          })
+          .join("");
+        $("profile").innerHTML =
+          `<div class="profile-label">Your Maturity Profile</div><h2>${escapeHTML(profile.name)}</h2><p>${escapeHTML(profile.interpretation)}</p><div class="next-action"><h3>Recommended Next Action</h3><p>${escapeHTML(profile.action)}</p></div>`;
+        $("lowest").innerHTML =
+          `<h2>Lowest-Scoring Dimensions</h2><ol>${lowest.map((d) => `<li>${escapeHTML(d.name)} (${d.score.toFixed(1)})</li>`).join("")}</ol><p class="tie-note">Ranked using unrounded scores. Ties follow the assessment’s dimension order.</p>`;
+        $("assessment-view").hidden = true;
+        $("results-view").hidden = false;
+        $("assessment-tab").classList.remove("active");
+        $("results-tab").classList.add("active");
+        if (radarChart) {
+          radarChart.destroy();
+          radarChart = null;
+        }
+        const chartReady = typeof Chart !== "undefined";
+        $("radar-chart").hidden = !chartReady;
+        $("chart-unavailable").hidden = chartReady;
+        if (chartReady)
+          radarChart = new Chart($("radar-chart"), {
+            type: "radar",
+            data: {
+              labels: dimensions.map((d) => d.name),
+              datasets: [
+                {
+                  label: "Your maturity",
+                  data: scores,
+                  borderColor: "#007d80",
+                  backgroundColor: "rgba(0,125,128,.20)",
+                  pointBackgroundColor: "#007d80",
+                  pointRadius: 4,
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: false,
+              layout: { padding: 8 },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `Score: ${context.raw.toFixed(1)} / 5`,
+                  },
+                },
+              },
+              scales: {
+                r: {
+                  min: 1,
+                  max: 5,
+                  ticks: {
+                    stepSize: 1,
+                    color: "#49617b",
+                    backdropColor: "transparent",
+                    font: { size: 11 },
+                  },
+                  grid: { color: "#d5e0e9" },
+                  angleLines: { color: "#d5e0e9" },
+                  pointLabels: {
+                    color: "#152d4e",
+                    font: { size: 11 },
+                    callback: (label) => {
+                      const lines = [];
+                      let line = "";
+                      label.split(" ").forEach((word) => {
+                        if ((line + " " + word).trim().length > 19) {
+                          lines.push(line);
+                          line = word;
+                        } else line = (line + " " + word).trim();
+                      });
+                      if (line) lines.push(line);
+                      return lines;
+                    },
+                  },
+                },
+              },
+            },
+          });
+        $("results-heading").focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+      $("assessment-form").addEventListener("change", (event) => {
+        if (event.target.matches('input[type="radio"]')) {
+          responses[event.target.name] = Number(event.target.value);
+          updateProgress();
+        }
+      });
+      $("assessment-view").addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-step]");
+        if (button && !button.disabled)
+          openDimension(Number(button.dataset.step));
+        if (event.target.closest("#review-progress")) {
+          $("submit-button").scrollIntoView({ block: "center" });
+        }
+      });
+      $("assessment-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (Object.keys(responses).length !== totalQuestions) return;
+        renderResults(scoreAssessment(responses));
+      });
+      $("retake-button").addEventListener("click", () => {
+        if (radarChart) {
+          radarChart.destroy();
+          radarChart = null;
+        }
+        responses = {};
+        activeDimension = 0;
+        $("assessment-form").reset();
+        $("results-view").hidden = true;
+        $("assessment-view").hidden = false;
+        $("score-cards").replaceChildren();
+        $("profile").replaceChildren();
+        $("lowest").replaceChildren();
+        $("assessment-tab").classList.add("active");
+        $("results-tab").classList.remove("active");
+        renderAssessment();
+        openDimension(0);
+      });
+      renderAssessment();
+    </script>
+  </body>
+</html>
